@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+highscores.json
+mainy.py
