@@ -7,17 +7,29 @@ COLORS = {
     'DEFAULT': "#d3d6da"
 }
 
+
 def load_words():
+    """Load words and return both list and set for fast validation"""
     words_path = os.path.join(os.path.dirname(__file__), '..', 'assets', 'words.txt')
+    
     try:
-        with open(words_path, 'r') as f:
-            words = [word.strip().upper() for word in f if len(word.strip()) == 5]
-            return words, set(words)
+        with open(words_path, 'r', encoding='utf-8') as f:
+            words = []
+            for line in f:
+                word = line.strip().upper()
+                if len(word) == 5 and word.isalpha():
+                    words.append(word)
+            
+            if not words:
+                raise ValueError("No valid words found")
+                
+            return words, set(words)   # list for random choice, set for fast lookup
+            
     except FileNotFoundError:
-        fallback = [
-            "APPLE", "BRAIN", "CRANE", "DREAM", "EAGLE", "FLAME", "GHOST", "HOUSE",
-            "IMAGE", "JUICE", "KNIFE", "LEMON", "MAGIC", "NIGHT", "OCEAN", "PEACE",
-            "QUEEN", "RIVER", "STONE", "TIGER", "UNITY", "VOICE", "WORLD", "YOUTH",
-            "ZEBRA", "BEACH", "CATCH", "DANCE", "EARTH", "FAITH"
-        ]
+        print(f"Warning: words.txt not found at {words_path}. Using fallback words.")
+        fallback = ["APPLE", "BRAIN", "CRANE", "DREAM", "EAGLE", "FLAME", "GHOST", "HOUSE", "IMAGE", "JUICE"]
+        return fallback, set(fallback)
+    except Exception as e:
+        print(f"Error loading words: {e}")
+        fallback = ["APPLE", "BRAIN", "CRANE", "DREAM", "EAGLE"]
         return fallback, set(fallback)

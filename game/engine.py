@@ -3,13 +3,15 @@ from .constants import load_words
 
 class GameEngine:
     def __init__(self):
-        self.word_list = load_words()
+        self.word_list, self.word_set = load_words()
 
     def get_random_word(self):
         return random.choice(self.word_list)
     
     def is_valid_word(self, guess):
-        return guess in self.word_list
+        if not guess or len(guess) != 5:
+            return False
+        return guess.upper() in self.word_set
 
     def get_feedback(self, guess, secret):
         feedback = ['X'] * 5

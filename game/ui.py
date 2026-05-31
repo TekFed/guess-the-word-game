@@ -289,7 +289,7 @@ class WordleGame:
 
     def game_over(self):
         messagebox.showinfo("Game Over", f"The word was: {self.secret_word}")
-        self.save_high_score_for_user()
+        self.save_high_level()
         self.new_game()
 
     def new_level(self):
