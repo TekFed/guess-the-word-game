@@ -2,7 +2,7 @@
 
 A modern, feature-rich **Wordle-style** word guessing game built with Python and Tkinter.
 
-![Game Preview](https://via.placeholder.com/800x400?text=Word+Guess+Game+Screenshot)  
+![Game Preview](https://github.com/TekFed/guess-the-word-game/blob/master/docs/screenshot-01.png)  
 
 
 ## ✨ Features
